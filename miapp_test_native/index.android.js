@@ -11,16 +11,34 @@ import {
   Text,
   View
 } from 'react-native';
+
 import ComponenteTexto from './src/component/loginView';
+import "./userAgent";
+
+import io from 'socket.io-client';
+const socket = io('http://192.168.137.1:8001/', {
+  transports: ['websocket'] // you need to explicitly tell it to use websockets
+});
+//socket = io('http://192.168.137.1:8001/',{jsonp:false});
+socket.on('messages', (data) => {
+    console.log('Some event was called, check out this data: ', data);
+});
 
 export default class miapp_test_native extends Component {
-   constructor() {
-      super()
-      this.state = {
+   constructor(props) {
+      super(props);
+	
+
+
+	this.state = {
          email: '',
-         password: ''
+         password: '',
+		 text: null
       }
    }
+   
+  
+   
    updateEmail = (text) => {
       this.setState({email: text})
    }
@@ -28,9 +46,12 @@ export default class miapp_test_native extends Component {
       this.setState({password: text})
    }
    login = () => {
-      alert('email: ' + this.state.email + ' password: ' + this.state.password)
-	  console.log('email: ' + this.state.email + ' password: ' + this.state.password);
+	   socket.emit('messages', 'Hello world!');
+	   
+	  
+	  
    }
+   
 
    render(){
       return(
@@ -63,5 +84,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
 
 AppRegistry.registerComponent('miapp_test_native', () => miapp_test_native);
