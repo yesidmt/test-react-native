@@ -14,21 +14,9 @@ export default  ComponenteTexto = (props) =>{
 
 		return(
 		<View>
-		 <TextInput
-            style = {styles.input}
-            placeholder = 'Email'
-            autoCapitalize = 'none'
-            onChangeText = {props.updateEmail}
-         />
-         <TextInput
-            style = {styles.input}
-            placeholder = 'Password'
-            autoCapitalize = 'none'
-            onChangeText = {props.updatePassword}
-         />
-         <TouchableHighlight
+		   <TouchableHighlight
             style = {styles.submit}
-            onPress = { () => props.login(props.email, props.password)}
+            onPress = { () => props.login()}
 		   >
             <Text>
                Submit
@@ -63,3 +51,5 @@ const styles = StyleSheet.create ({
 	 
    }
 });
+
+
