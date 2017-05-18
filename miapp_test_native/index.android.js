@@ -18,6 +18,7 @@ import "./userAgent";
 import io from 'socket.io-client';
 const socket = io('http://192.168.137.1:8001/', {
   transports: ['websocket'] // you need to explicitly tell it to use websockets
+  
 });
 //socket = io('http://192.168.137.1:8001/',{jsonp:false});
 socket.on('messages', (data) => {
@@ -46,11 +47,18 @@ export default class miapp_test_native extends Component {
       this.setState({password: text})
    }
    login = () => {
-	   socket.emit('messages', 'Hello world!');
-	   
-	  
-	  
+	    console.log("enviando mensaje");
+		var mens = JSON.stringify({
+
+            id: "yesid.mt@hotmail.com"
+           
+           
+        });
+		
+	   socket.emit('storeClientInfo', mens);
+	 
    }
+   
    
 
    render(){
@@ -62,7 +70,7 @@ export default class miapp_test_native extends Component {
                login = {this.login}
             />
          </View>
-      )
+      ) 
    }
 }
 
